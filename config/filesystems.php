@@ -56,6 +56,15 @@ return [
             'throw' => false,
         ],
 
+        'media' => [
+            'driver' => 's3',
+            'key' => 'your_key',
+            'secret' => 'your_secret_key',
+            'endpoint' => 'http://storage.yandexcloud.net/',
+            'region' => 'us-west-2',
+            'bucket' => 'static.example.com',
+            'url' => 'http://static.example.com/',
+        ],
     ],
 
     /*
