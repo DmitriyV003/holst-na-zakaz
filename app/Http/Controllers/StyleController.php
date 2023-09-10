@@ -8,9 +8,13 @@ use App\Models\Style;
 
 class StyleController extends Controller
 {
-    public function index()
+    public function index($request)
     {
-        return StyleResource::collection(Style::all());
+        $query = Style::query()
+            ->when($request->input('site_id'), function ($query, $siteId) {
+                 $query->where('site_id', $siteId);
+            });
+        return StyleResource::collection($query->get());
     }
 
     public function store(StyleRequest $request)

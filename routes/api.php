@@ -4,6 +4,7 @@ use App\Http\Controllers\AngleController;
 use App\Http\Controllers\FormApplicationController;
 use App\Http\Controllers\FormTypeController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SizeController;
@@ -27,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::post('form-application', [FormApplicationController::class, 'store']);
+    Route::post('media', [MediaController::class, 'store']);
 
     Route::prefix('admin')->group(function () {
         Route::apiResource('form-type', FormTypeController::class)

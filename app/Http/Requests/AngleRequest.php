@@ -9,6 +9,11 @@ class AngleRequest extends FormRequest
 {
     public function rules(): array
     {
+        $uniqueRule = Rule::unique('angles', 'code');
+        if (isset($this->angle)) {
+            $uniqueRule->ignore($this->angle->id);
+        }
+
         return [
             'name' => [
                 'required',
@@ -17,7 +22,11 @@ class AngleRequest extends FormRequest
             'code' => [
                 'required',
                 'string',
-                Rule::unique('angles', 'code'),
+                $uniqueRule
+            ],
+            'media_id' => [
+                'required',
+                Rule::exists('media', 'id'),
             ],
         ];
     }

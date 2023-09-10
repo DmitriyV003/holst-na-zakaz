@@ -9,10 +9,15 @@ class SiteRequest extends FormRequest
 {
     public function rules(): array
     {
+        $uniqueRule = Rule::unique('sites', 'name');
+        if (isset($this->site)) {
+            $uniqueRule->ignore($this->site->id);
+        }
+
         return [
             'name' => [
                 'string',
-                Rule::unique('sites', 'name'),
+                $uniqueRule,
             ],
             'address' => 'string|required',
             'email' => 'string|required',

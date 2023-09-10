@@ -58,12 +58,12 @@ return [
 
         'media' => [
             'driver' => 's3',
-            'key' => 'your_key',
-            'secret' => 'your_secret_key',
-            'endpoint' => 'http://storage.yandexcloud.net/',
+            'key' => 'YCAJEtonsoLG4Zrqjmj2QvIHZ',
+            'secret' => 'YCNMwlI4sqCvXBLsirJngeB1J7pMGvptLTDrRzdG',
+            'endpoint' => 'https://storage.yandexcloud.net/',
             'region' => 'us-west-2',
-            'bucket' => 'static.example.com',
-            'url' => 'http://static.example.com/',
+            'bucket' => 'holst-na-zakaz',
+            'url' => 'https://storage.yandexcloud.net/holst-na-zakaz',
         ],
     ],
 

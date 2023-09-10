@@ -12,8 +12,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
+            $table->unsignedInteger('media_id');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('media_id')->references('id')->on('media');
         });
     }
 

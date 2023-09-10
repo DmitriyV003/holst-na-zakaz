@@ -15,6 +15,7 @@ class AngleResource extends Resource
             'code' => $this->code,
             'created_at' => $this->formatDateField($this->created_at),
             'updated_at' => $this->formatDateField($this->updated_at),
+            'media' => new MediaResource($this->whenLoaded('imageMedia')),
         ];
     }
 }
