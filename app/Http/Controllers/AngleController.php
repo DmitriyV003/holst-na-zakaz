@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\AngleManager;
 use App\Http\Requests\AngleRequest;
 use App\Http\Resources\AngleResource;
-use App\MediaManager;
 use App\Models\Angle;
-use App\Models\Media;
 
 class AngleController extends Controller
 {
@@ -19,9 +18,8 @@ class AngleController extends Controller
 
     public function store(AngleRequest $request)
     {
-        $angle = Angle::create($request->validated());
-        app(MediaManager::class, ['media' => Media::findOrFail($request->input('media_id'))])
-            ->updateRelation($angle);
+        $angle = app(AngleManager::class)->create($request->validated());
+
         return new AngleResource($angle->load('imageMedia'));
     }
 
@@ -32,9 +30,7 @@ class AngleController extends Controller
 
     public function update(AngleRequest $request, Angle $angle)
     {
-        $angle->update($request->validated());
-        app(MediaManager::class, ['media' => Media::findOrFail($request->input('media_id'))])
-            ->updateRelation($angle);
+        app(AngleManager::class, ['angle' => $angle])->update($request->validated());
 
         return new AngleResource($angle);
     }
