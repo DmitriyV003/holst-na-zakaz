@@ -22,6 +22,11 @@ class FormApplicationRequest extends FormRequest
                 'nullable',
                 Rule::exists('form_types', 'id'),
             ],
+            'media_id' => [
+                'nullable',
+                'integer',
+                Rule::exists('media', 'id'),
+            ],
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use PostScripton\Money\Rules\Money;
 
 class AngleRequest extends FormRequest
 {
@@ -23,6 +24,14 @@ class AngleRequest extends FormRequest
                 'required',
                 'string',
                 $uniqueRule
+            ],
+            'price' => [
+                'required',
+                app(Money::class),
+            ],
+            'old_price' => [
+                'nullable',
+                app(Money::class),
             ],
             'media_id' => [
                 'required',

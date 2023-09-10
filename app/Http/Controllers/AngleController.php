@@ -13,12 +13,14 @@ class AngleController extends Controller
 
     public function index()
     {
-        return AngleResource::collection(Angle::query()->paginate(self::PER_PAGE));
+        return AngleResource::collection(Angle::query()->with('imageMedia')->paginate(self::PER_PAGE));
     }
 
     public function store(AngleRequest $request)
     {
-        $angle = app(AngleManager::class)->create($request->validated());
+        $params = $request->validated();
+        $this->formatParams($params);
+        $angle = app(AngleManager::class, ['angle' => null])->create($params);
 
         return new AngleResource($angle->load('imageMedia'));
     }
@@ -30,7 +32,9 @@ class AngleController extends Controller
 
     public function update(AngleRequest $request, Angle $angle)
     {
-        app(AngleManager::class, ['angle' => $angle])->update($request->validated());
+        $params = $request->validated();
+        $this->formatParams($params);
+        app(AngleManager::class, ['angle' => $angle])->update($params);
 
         return new AngleResource($angle);
     }
@@ -40,5 +44,15 @@ class AngleController extends Controller
         $angle->delete();
 
         return response()->json();
+    }
+
+    private function formatParams(array &$params)
+    {
+        if (isset($params['price'])) {
+            $params['price'] = money_parse($params['price']);
+        }
+        if (isset($params['old_price'])) {
+            $params['old_price'] = money_parse($params['old_price']);
+        }
     }
 }

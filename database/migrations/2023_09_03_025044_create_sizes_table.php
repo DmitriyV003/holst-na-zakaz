@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('size');
             $table->boolean('is_show');
             $table->unsignedBigInteger('price');
+            $table->unsignedBigInteger('old_price')->nullable();
             $table->unsignedBigInteger('site_id');
             $table->softDeletes();
             $table->timestamps();

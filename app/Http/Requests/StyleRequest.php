@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use PostScripton\Money\Rules\Money;
 
 class StyleRequest extends FormRequest
 {
@@ -14,6 +15,14 @@ class StyleRequest extends FormRequest
                 'required',
                 'string',
             ],
+            'price' => [
+                'required',
+                app(Money::class),
+            ],
+            'old_price' => [
+                'nullable',
+                app(Money::class),
+            ],
             'site_id' => [
                 'required',
                 'integer',
@@ -22,6 +31,14 @@ class StyleRequest extends FormRequest
             'is_show' => [
                 'boolean',
                 'required',
+            ],
+            'media_ids' => [
+                'nullable',
+                'array',
+            ],
+            'media_ids.*' => [
+                'integer',
+                Rule::exists('media', 'id'),
             ],
         ];
     }

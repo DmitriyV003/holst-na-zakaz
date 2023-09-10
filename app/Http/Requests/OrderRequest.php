@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use PostScripton\Money\Rules\Money;
 
 class OrderRequest extends FormRequest
 {
@@ -14,7 +15,10 @@ class OrderRequest extends FormRequest
             'phone' => 'required_without:form_application_id|string',
             'delivery_date' => 'nullable|date',
             'delivery_address' => 'nullable|string',
-            'price' => 'required|integer',
+            'price' => [
+                'required',
+                app(Money::class),
+            ],
             'faces' => 'required|integer',
             'form_application_id' => [
                 'nullable',

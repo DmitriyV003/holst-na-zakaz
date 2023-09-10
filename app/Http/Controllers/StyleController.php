@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StyleRequest;
 use App\Http\Resources\StyleResource;
 use App\Models\Style;
+use App\StyleManager;
 
 class StyleController extends Controller
 {
@@ -19,7 +20,8 @@ class StyleController extends Controller
 
     public function store(StyleRequest $request)
     {
-        return new StyleResource(Style::create($request->validated()));
+        $style = app(StyleManager::class, ['style' => null])->create($request->validated());
+        return new StyleResource($style->load('images'));
     }
 
     public function show(Style $style)

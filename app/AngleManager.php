@@ -2,12 +2,9 @@
 
 namespace App;
 
-use App\Exceptions\ManagerException;
 use App\Models\Angle;
 use App\Models\Media;
 use DB;
-use http\Exception\RuntimeException;
-use Throwable;
 
 class AngleManager
 {
@@ -22,8 +19,7 @@ class AngleManager
     {
         DB::transaction(function () use ($params) {
             $this->angle = Angle::create(collect($params)->except('media_id')->toArray());
-            app(MediaManager::class, ['media' => Media::findOrFail($params['media_id'])])
-                ->updateRelation($this->angle);
+            $this->angle->media()->save( Media::findOrFail($params['media_id']));
         });
 
         return $this->angle;
@@ -33,11 +29,9 @@ class AngleManager
     {
         DB::transaction(function () use ($params) {
             $this->angle->update(collect($params)->except('media_id')->toArray());
-            app(MediaManager::class, ['media' => Media::findOrFail($params['media_id'])])
-                ->updateRelation($this->angle);
+            $this->angle->media()->save( Media::findOrFail($params['media_id']));
         });
 
         return $this->angle;
     }
-
 }

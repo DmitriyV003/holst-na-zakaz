@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FormApplicationManager;
 use App\Http\Requests\FormApplicationRequest;
 use App\Http\Resources\FormApplicationResource;
 use App\Models\FormApplication;
@@ -17,7 +18,9 @@ class FormApplicationController extends Controller
 
     public function store(FormApplicationRequest $request)
     {
-        return new FormApplicationResource(FormApplication::create($request->validated()));
+        $application = app(FormApplicationManager::class, ['formApplication' => null])
+            ->create($request->validated());
+        return new FormApplicationResource($application);
     }
 
     public function update(FormApplicationRequest $request, FormApplication $formApplication)

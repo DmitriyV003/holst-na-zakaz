@@ -34,9 +34,4 @@ class MediaManager
 
         return $this->media;
     }
-
-    public function updateRelation(HasMedia|Model $model): void
-    {
-        $this->media->model()->associate($model)->save();
-    }
 }

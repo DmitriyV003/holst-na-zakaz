@@ -8,6 +8,7 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\StyleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,8 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('size', SizeController::class)
             ->only(['show', 'store', 'index', 'update', 'destroy']);
         Route::apiResource('angle', AngleController::class)
+            ->only(['show', 'store', 'index', 'update', 'destroy']);
+        Route::apiResource('style', StyleController::class)
             ->only(['show', 'store', 'index', 'update', 'destroy']);
         Route::apiResource('order', OrderController::class)
             ->only(['show', 'store', 'index', 'update']);

@@ -12,6 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('code')->unique();
+            $table->unsignedBigInteger('price');
+            $table->unsignedBigInteger('old_price')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

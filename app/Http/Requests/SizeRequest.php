@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use PostScripton\Money\Rules\Money;
 
 class SizeRequest extends FormRequest
 {
@@ -25,7 +26,11 @@ class SizeRequest extends FormRequest
             ],
             'price' => [
                 'required',
-                'integer',
+                app(Money::class),
+            ],
+            'old_price' => [
+                'nullable',
+                app(Money::class),
             ],
         ];
     }

@@ -11,7 +11,10 @@ return new class extends Migration
         Schema::create('styles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('is_show');
             $table->unsignedBigInteger('site_id');
+            $table->unsignedBigInteger('price');
+            $table->unsignedBigInteger('old_price')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
