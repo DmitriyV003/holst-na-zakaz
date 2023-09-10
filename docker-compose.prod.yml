@@ -36,6 +36,3 @@ services:
             COMPOSER_MEMORY_LIMIT: 4G
     redis:
         image: redis:latest
-
-volumes:
-    db:
