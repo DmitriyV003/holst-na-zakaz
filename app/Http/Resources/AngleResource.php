@@ -3,8 +3,50 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
-/** @mixin \App\Models\Angle */
+/**
+ * Class AngleResource.
+ *
+ * @OA\Schema(
+ *     title="AngleResource",
+ *     description="AngleResource model",
+ *     type="object",
+ *     @OA\Property(
+ *          property="id",
+ *          type="integer"
+ *     ),
+ *     @OA\Property(
+ *          property="name",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="code",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="price",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="old_price",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="created_at",
+ *          type="dateTime"
+ *     ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          type="dateTime"
+ *     ),
+ *     @OA\Property(
+ *          property="media",
+ *          type="object",
+ *          ref="#/components/schemas/MediaResource"
+ *     )
+ * )
+ */
 class AngleResource extends Resource
 {
     public function toArray(Request $request): array

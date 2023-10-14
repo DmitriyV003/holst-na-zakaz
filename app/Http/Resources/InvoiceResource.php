@@ -3,8 +3,46 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
-/** @mixin \App\Models\Angle */
+/**
+ * Class InvoiceResource.
+ *
+ * @OA\Schema(
+ *     title="InvoiceResource",
+ *     description="InvoiceResource model",
+ *     type="object",
+ *     @OA\Property(
+ *          property="id",
+ *          type="integer"
+ *     ),
+ *     @OA\Property(
+ *          property="type",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="amount",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="old_price",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="created_at",
+ *          type="dateTime"
+ *     ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          type="dateTime"
+ *     ),
+ *     @OA\Property(
+ *          property="order",
+ *          type="object",
+ *          ref="#/components/schemas/OrderResource"
+ *     )
+ * )
+ */
 class InvoiceResource extends Resource
 {
     public function toArray(Request $request): array

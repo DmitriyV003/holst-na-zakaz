@@ -1,0 +1,389 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Form Applications Controller",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/admin/form-application": {
+            "get": {
+                "summary": "Returns paginated form applicaions",
+                "operationId": "getAllFormApplications",
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/FormApplicationResource"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/form-application": {
+            "post": {
+                "summary": "Returns paginated form applicaions",
+                "operationId": "storeFormAppication",
+                "requestBody": {
+                    "$ref": "#/components/requestBodies/FormApplication"
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/FormApplicationResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AngleResource": {
+                "title": "AngleResource",
+                "description": "AngleResource model",
+                "properties": {
+                    "id": {
+                        "description": "Class AngleResource.",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "string"
+                    },
+                    "old_price": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "dateTime"
+                    },
+                    "updated_at": {
+                        "type": "dateTime"
+                    },
+                    "media": {
+                        "$ref": "#/components/schemas/MediaResource"
+                    }
+                },
+                "type": "object"
+            },
+            "FormApplicationResource": {
+                "title": "FormApplicationResource",
+                "description": "FormApplicationResource model",
+                "properties": {
+                    "id": {
+                        "description": "Class FormApplicationResource.",
+                        "type": "integer"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "comment": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "dateTime"
+                    },
+                    "updated_at": {
+                        "type": "dateTime"
+                    },
+                    "form_type": {
+                        "$ref": "#/components/schemas/FormTypeResource"
+                    }
+                },
+                "type": "object"
+            },
+            "FormTypeResource": {
+                "title": "FormTypeResource",
+                "description": "FormTypeResource model",
+                "properties": {
+                    "id": {
+                        "description": "Class FormTypeResource.",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "dateTime"
+                    },
+                    "updated_at": {
+                        "type": "dateTime"
+                    },
+                    "deleted_at": {
+                        "type": "dateTime"
+                    }
+                },
+                "type": "object"
+            },
+            "InvoiceResource": {
+                "title": "InvoiceResource",
+                "description": "InvoiceResource model",
+                "properties": {
+                    "id": {
+                        "description": "Class InvoiceResource.",
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "string"
+                    },
+                    "old_price": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "dateTime"
+                    },
+                    "updated_at": {
+                        "type": "dateTime"
+                    },
+                    "order": {
+                        "$ref": "#/components/schemas/OrderResource"
+                    }
+                },
+                "type": "object"
+            },
+            "MediaResource": {
+                "title": "MediaResource",
+                "description": "MediaResource model",
+                "properties": {
+                    "id": {
+                        "description": "Class MediaResource.",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "src": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "dateTime"
+                    },
+                    "updated_at": {
+                        "type": "dateTime"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderResource": {
+                "title": "OrderResource",
+                "description": "OrderResource model",
+                "properties": {
+                    "id": {
+                        "description": "Class OrderResource.",
+                        "type": "integer"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "admin_comment": {
+                        "type": "string"
+                    },
+                    "delivery_date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "delivery_address": {
+                        "type": "string"
+                    },
+                    "price": {
+                        "type": "string"
+                    },
+                    "faces": {
+                        "type": "integer"
+                    },
+                    "form_application": {
+                        "$ref": "#/components/schemas/FormApplicationResource"
+                    },
+                    "size": {
+                        "$ref": "#/components/schemas/SizeResource"
+                    },
+                    "angle": {
+                        "$ref": "#/components/schemas/AngleResource"
+                    },
+                    "created_at": {
+                        "type": "dateTime"
+                    },
+                    "updated_at": {
+                        "type": "dateTime"
+                    }
+                },
+                "type": "object"
+            },
+            "SiteResource": {
+                "title": "SiteResource",
+                "description": "SiteResource model",
+                "properties": {
+                    "id": {
+                        "description": "Class SiteResource.",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "main_image": {
+                        "type": "string"
+                    },
+                    "main_title": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "emial": {
+                        "type": "string"
+                    },
+                    "skype": {
+                        "type": "string"
+                    },
+                    "phone_country": {
+                        "type": "string"
+                    },
+                    "phone_moscow": {
+                        "type": "string"
+                    },
+                    "phone_spb": {
+                        "type": "string"
+                    },
+                    "support": {
+                        "type": "string"
+                    },
+                    "work_hours": {
+                        "type": "string"
+                    },
+                    "tin": {
+                        "type": "string"
+                    },
+                    "ip": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "dateTime"
+                    },
+                    "updated_at": {
+                        "type": "dateTime"
+                    },
+                    "deleted_at": {
+                        "type": "dateTime"
+                    }
+                },
+                "type": "object"
+            },
+            "SizeResource": {
+                "title": "SizeResource",
+                "description": "SizeResource model",
+                "properties": {
+                    "id": {
+                        "description": "Class SizeResource.",
+                        "type": "integer"
+                    },
+                    "size": {
+                        "type": "string"
+                    },
+                    "is_show": {
+                        "type": "boolean"
+                    },
+                    "price": {
+                        "type": "string"
+                    },
+                    "old_price": {
+                        "type": "string"
+                    },
+                    "site": {
+                        "$ref": "#/components/schemas/SiteResource"
+                    },
+                    "created_at": {
+                        "type": "dateTime"
+                    },
+                    "updated_at": {
+                        "type": "dateTime"
+                    },
+                    "deleted_at": {
+                        "type": "dateTime"
+                    }
+                },
+                "type": "object"
+            },
+            "StyleResource": {
+                "title": "StyleResource",
+                "description": "StyleResource model",
+                "properties": {
+                    "id": {
+                        "description": "Class StyleResource.",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "site": {
+                        "$ref": "#/components/schemas/SiteResource"
+                    },
+                    "price": {
+                        "type": "string"
+                    },
+                    "old_price": {
+                        "type": "string"
+                    },
+                    "is_show": {
+                        "type": "boolean"
+                    },
+                    "created_at": {
+                        "type": "dateTime"
+                    },
+                    "updated_at": {
+                        "type": "dateTime"
+                    },
+                    "deleted_at": {
+                        "type": "dateTime"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "requestBodies": {
+            "FormApplication": {
+                "description": "Pet object that needs to be added to the store",
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "phone": {
+                                    "type": "string"
+                                },
+                                "comment": {
+                                    "type": "string"
+                                },
+                                "form_type_id": {
+                                    "type": "integer"
+                                },
+                                "media_id": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

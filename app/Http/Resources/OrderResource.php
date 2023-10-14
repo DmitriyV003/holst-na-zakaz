@@ -3,8 +3,68 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
-/** @mixin \App\Models\Order */
+/**
+ * Class OrderResource.
+ *
+ * @OA\Schema(
+ *     title="OrderResource",
+ *     description="OrderResource model",
+ *     type="object",
+ *     @OA\Property(
+ *          property="id",
+ *          type="integer"
+ *     ),
+ *     @OA\Property(
+ *          property="status",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="admin_comment",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="delivery_date",
+ *          type="datetime"
+ *     ),
+ *     @OA\Property(
+ *          property="delivery_address",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="price",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="faces",
+ *          type="integer"
+ *     ),
+ *     @OA\Property(
+ *          property="form_application",
+ *          type="object",
+ *          ref="#/components/schemas/FormApplicationResource"
+ *     ),
+ *     @OA\Property(
+ *          property="size",
+ *          type="object",
+ *          ref="#/components/schemas/SizeResource"
+ *     ),
+ *     @OA\Property(
+ *          property="angle",
+ *          type="object",
+ *          ref="#/components/schemas/AngleResource"
+ *     ),
+ *     @OA\Property(
+ *          property="created_at",
+ *          type="dateTime"
+ *     ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          type="dateTime"
+ *     )
+ * )
+ */
 class OrderResource extends Resource
 {
     public function toArray(Request $request): array

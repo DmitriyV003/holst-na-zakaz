@@ -3,8 +3,37 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
-/** @mixin \App\Models\FormType */
+/**
+ * Class FormTypeResource.
+ *
+ * @OA\Schema(
+ *     title="FormTypeResource",
+ *     description="FormTypeResource model",
+ *     type="object",
+ *     @OA\Property(
+ *          property="id",
+ *          type="integer"
+ *     ),
+ *     @OA\Property(
+ *          property="name",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="created_at",
+ *          type="dateTime"
+ *     ),
+ *      @OA\Property(
+ *          property="updated_at",
+ *          type="dateTime"
+ *     ),
+ *     @OA\Property(
+ *          property="deleted_at",
+ *          type="dateTime"
+ *     )
+ * )
+ */
 class FormTypeResource extends Resource
 {
     public function toArray(Request $request): array

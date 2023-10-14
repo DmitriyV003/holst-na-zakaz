@@ -3,8 +3,42 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
-/** @mixin \App\Models\FormApplication */
+/**
+ * Class FormApplicationResource.
+ *
+ * @OA\Schema(
+ *     title="FormApplicationResource",
+ *     description="FormApplicationResource model",
+ *     type="object",
+ *     @OA\Property(
+ *          property="id",
+ *          type="integer"
+ *     ),
+ *     @OA\Property(
+ *          property="phone",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="comment",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="created_at",
+ *          type="dateTime"
+ *     ),
+ *     @OA\Property(
+ *          property="updated_at",
+ *          type="dateTime"
+ *     ),
+ *     @OA\Property(
+ *          property="form_type",
+ *          type="object",
+ *          ref="#/components/schemas/FormTypeResource"
+ *     )
+ * )
+ */
 class FormApplicationResource extends Resource
 {
     public function toArray(Request $request): array

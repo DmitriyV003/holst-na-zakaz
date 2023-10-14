@@ -3,8 +3,54 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
-/** @mixin \App\Models\Size */
+/**
+ * Class SizeResource.
+ *
+ * @OA\Schema(
+ *     title="SizeResource",
+ *     description="SizeResource model",
+ *     type="object",
+ *     @OA\Property(
+ *          property="id",
+ *          type="integer"
+ *     ),
+ *     @OA\Property(
+ *          property="size",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="is_show",
+ *          type="boolean"
+ *     ),
+ *     @OA\Property(
+ *          property="price",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="old_price",
+ *          type="string"
+ *     ),
+ *     @OA\Property(
+ *          property="site",
+ *          type="object",
+ *          ref="#/components/schemas/SiteResource"
+ *     ),
+ *     @OA\Property(
+ *          property="created_at",
+ *          type="dateTime"
+ *     ),
+ *     @OA\Property(
+ *          property="updated_at",
+ *          type="dateTime"
+ *     ),
+ *     @OA\Property(
+ *          property="deleted_at",
+ *          type="dateTime"
+ *     )
+ * )
+ */
 class SizeResource extends Resource
 {
     public function toArray(Request $request): array

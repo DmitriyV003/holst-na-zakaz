@@ -6,16 +6,51 @@ use App\FormApplicationManager;
 use App\Http\Requests\FormApplicationRequest;
 use App\Http\Resources\FormApplicationResource;
 use App\Models\FormApplication;
+use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Info(title="Form Applications Controller", version="1.0")
+ */
 class FormApplicationController extends Controller
 {
     private const PER_PAGE = 20;
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/admin/form-application",
+     *     summary="Returns paginated form applicaions",
+     *     operationId="getAllFormApplications",
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/FormApplicationResource")
+     *         )
+     *     )
+     * )
+     */
     public function index()
     {
         return FormApplicationResource::collection(FormApplication::query()->paginate(self::PER_PAGE));
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/v1/form-application",
+     *     summary="Returns paginated form applicaions",
+     *     operationId="storeFormAppication",
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             ref="#/components/schemas/FormApplicationResource"
+     *         )
+     *     ),
+     *     @OA\RequestBody(ref="#/components/requestBodies/FormApplication")
+     * )
+     */
     public function store(FormApplicationRequest $request)
     {
         $application = app(FormApplicationManager::class, ['formApplication' => null])
