@@ -35,4 +35,5 @@ class Calculator
             'oldPrice' => $oldPrice,
         ];
     }
+    
 }
