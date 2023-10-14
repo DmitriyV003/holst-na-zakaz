@@ -9,6 +9,7 @@ use App\Models\Style;
 class Calculator
 {
     private Style $style;
+    
     private Size $size;
     private ?Angle $angle;
 
