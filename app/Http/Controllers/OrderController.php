@@ -32,7 +32,7 @@ class OrderController extends Controller
                 })
                 ->when($request->input('phone'), function (Builder $query, $phone) {
                     $query->whereHas('formApplication', function ($query) use ($phone) {
-                        $query->wherePhone($phone);
+                        $query->where('phone', 'like', "%$phone%");
                     });
                 })
                 ->when($request->input('form_type_id'), function (Builder $query, $formTypeId) {

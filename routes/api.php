@@ -8,6 +8,7 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SizeController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\StyleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,5 +50,6 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('invoice', InvoiceController::class)
             ->only(['show', 'store', 'index']);
         Route::post('order/{order}/credit', [OrderController::class, 'createCreditInvoice']);
+        Route::post('stats', [StatsController::class, 'statsByPeriod']);
     });
 });
