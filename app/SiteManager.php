@@ -38,7 +38,13 @@ class SiteManager
     private function syncFields(array $fields): void
     {
         $typesValues = collect($fields['fields'])->mapWithKeys(function ($item) {
-            return [$item['field_id'] => ['value' => $item['value']]];
+            return [
+                $item['field_id'] =>
+                    [
+                        'value' => $item['value'],
+                        'location' => $item['location'],
+                    ],
+            ];
         });
         $this->site->fieldTypes()->sync($typesValues->all());
     }

@@ -15,6 +15,9 @@ class FieldTypeResource extends Resource
             'value' => $this->whenPivotLoaded('site_field_type', function () {
                 return $this->pivot->value;
             }),
+            'location' => $this->whenPivotLoaded('site_field_type', function () {
+                return $this->pivot->location;
+            }),
             'created_at' => $this->formatDateField($this->created_at),
             'updated_at' => $this->formatDateField($this->updated_at),
         ];

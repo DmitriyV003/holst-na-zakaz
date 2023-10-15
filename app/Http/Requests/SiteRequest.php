@@ -22,6 +22,7 @@ class SiteRequest extends FormRequest
             'fields' => 'nullable|array',
             'fields.*.field_id' => 'exists:field_types,id',
             'fields.*.value' => 'required|string',
+            'fields.*.location' => 'required|string',
         ];
     }
 }

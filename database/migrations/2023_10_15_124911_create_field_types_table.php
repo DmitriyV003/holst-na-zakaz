@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('site_field_type', function (Blueprint $table) {
             $table->id();
             $table->string('value');
+            $table->string('location');
             $table->unsignedBigInteger('site_id');
             $table->foreign('site_id')->references('id')->on('sites');
             $table->unsignedBigInteger('field_type_id');

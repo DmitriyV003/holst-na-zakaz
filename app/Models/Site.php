@@ -26,6 +26,6 @@ class Site extends Model
 
     public function fieldTypes(): BelongsToMany
     {
-        return $this->belongsToMany(FieldType::class, 'site_field_type')->withPivot('value');
+        return $this->belongsToMany(FieldType::class, 'site_field_type')->withPivot('value', 'location');
     }
 }
