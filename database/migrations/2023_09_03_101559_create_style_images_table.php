@@ -11,12 +11,8 @@ return new class extends Migration
         Schema::create('style_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('style_id');
-            $table->unsignedBigInteger('media_id');
-            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('slide_number');
             $table->timestamps();
-
-            $table->foreign('style_id')->references('id')->on('styles');
-            $table->foreign('parent_id')->references('id')->on('style_images');
         });
     }
 

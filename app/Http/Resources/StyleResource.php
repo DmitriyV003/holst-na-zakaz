@@ -60,9 +60,9 @@ class StyleResource extends Resource
             'id' => $this->resource->id,
             'name' => $this->resource->name,
             'site_id' => $this->resource->site_id,
-            'price' => $this->resource->price->toDecimalString(0),
-            'old_price' => $this->resource->old_price ? $this->resource->old_price->toDecimalString(0) : null,
-            'media' => MediaResource::collection($this->whenLoaded('images')),
+            'price' => $this->resource->price->toDecimalString(4),
+            'old_price' => $this->resource->old_price ? $this->resource->old_price->toDecimalString(4) : null,
+            'style_images' => StyleImageResource::collection($this->whenLoaded('styleImages')),
             'created_at' => $this->formatDateField($this->resource->created_at),
             'updated_at' => $this->formatDateField($this->resource->updated_at),
         ];

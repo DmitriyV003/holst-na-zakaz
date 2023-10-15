@@ -9,11 +9,14 @@ use App\InvoiceManager;
 use App\Models\FormApplication;
 use App\Models\Order;
 use App\OrderManager;
+use App\Traits\ParseToMoney;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    use ParseToMoney;
+
     private const PER_PAGE = 20;
 
     /**
@@ -117,8 +120,10 @@ class OrderController extends Controller
      */
     public function store(OrderRequest $request)
     {
+        $params = $request->validated();
+        $this->formatParams($params);
         $order = app(OrderManager::class, ['order' => null])
-            ->create($request->validated(), FormApplication::query()->find($request->input('form_application_id')));
+            ->create($params, FormApplication::query()->find($request->input('form_application_id')));
         return new OrderResource($order);
     }
 
@@ -173,7 +178,9 @@ class OrderController extends Controller
      */
     public function update(OrderRequest $request, Order $order)
     {
-        $order->update($request->validated());
+        $params = $request->validated();
+        $this->formatParams($params);
+        $order->update($params);
 
         return new OrderResource($order);
     }

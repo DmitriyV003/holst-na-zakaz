@@ -12,11 +12,14 @@ class StyleManager
 
     public function create(array $params): Style
     {
-        $this->style = app(Style::class)->fill(collect($params)->except('media_ids')->toArray());
+        $this->style = app(Style::class)->fill(collect($params)->except('media')->toArray());
         DB::transaction(function () use ($params) {
             $this->style->save();
-            if (isset($params['media_ids'])) {
-                $this->style->images()->saveMany(Media::find($params['media_ids']));
+            if (isset($params['media'])) {
+                collect($params['media'])->each(function ($item) {
+                    $styleImage = $this->style->styleImages()->create($item);
+                    $styleImage->imageMedia()->save(Media::findOrFail($item['media_id']));
+                });
             }
         });
 

@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SizeRequest;
 use App\Http\Resources\SizeResource;
 use App\Models\Size;
+use App\Traits\ParseToMoney;
 
 class SizeController extends Controller
 {
+    use ParseToMoney;
+
     private const PER_PAGE = 20;
 
     /**
@@ -48,7 +51,9 @@ class SizeController extends Controller
      */
     public function store(SizeRequest $request)
     {
-        return new SizeResource(Size::create($request->validated()));
+        $params = $request->validated();
+        $this->formatParams($params);
+        return new SizeResource(Size::create($params));
     }
 
     /**
@@ -102,7 +107,9 @@ class SizeController extends Controller
      */
     public function update(SizeRequest $request, Size $size)
     {
-        $size->update($request->validated());
+        $params = $request->validated();
+        $this->formatParams($params);
+        $size->update($params);
 
         return new SizeResource($size);
     }

@@ -19,7 +19,7 @@ class AngleManager
     {
         DB::transaction(function () use ($params) {
             $this->angle = Angle::create(collect($params)->except('media_id')->toArray());
-            $this->angle->media()->save( Media::findOrFail($params['media_id']));
+            $this->angle->media()->save(Media::findOrFail($params['media_id']));
         });
 
         return $this->angle;
@@ -29,7 +29,7 @@ class AngleManager
     {
         DB::transaction(function () use ($params) {
             $this->angle->update(collect($params)->except('media_id')->toArray());
-            $this->angle->media()->save( Media::findOrFail($params['media_id']));
+            $this->angle->media()->save(Media::findOrFail($params['media_id']));
         });
 
         return $this->angle;

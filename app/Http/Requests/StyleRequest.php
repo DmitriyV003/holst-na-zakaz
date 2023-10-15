@@ -38,7 +38,7 @@ use OpenApi\Annotations as OA;
  *                  type="integer"
  *              ),
  *              @OA\Property(
- *                  property="media_ids",
+ *                  property="media",
  *                  type="array",
  *                  @OA\Items(type="integer")
  *              )
@@ -72,14 +72,18 @@ class StyleRequest extends FormRequest
                 'boolean',
                 'required',
             ],
-            'media_ids' => [
+            'media' => [
                 'nullable',
                 'array',
             ],
-            'media_ids.*' => [
+            'media.*.media_id' => [
                 'integer',
                 Rule::exists('media', 'id'),
             ],
+            'media.*.slide_number' => [
+                'integer',
+                'required',
+            ]
         ];
     }
 }

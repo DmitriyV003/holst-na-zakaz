@@ -6,14 +6,18 @@ use App\Http\Requests\StyleRequest;
 use App\Http\Resources\StyleResource;
 use App\Models\Style;
 use App\StyleManager;
+use App\Traits\ParseToMoney;
+use Illuminate\Http\Request;
 
 class StyleController extends Controller
 {
+    use ParseToMoney;
+
     private const PER_PAGE = 20;
 
     /**
      * @OA\Get(
-     *     path="/api/v1/style",
+     *     path="/api/v1/admin/style",
      *     summary="Returns paginated styles",
      *     operationId="getAllStyles",
      *     @OA\Parameter(
@@ -34,9 +38,9 @@ class StyleController extends Controller
      *     )
      * )
      */
-    public function index($request)
+    public function index(Request $request)
     {
-        $query = Style::query()
+        $query = Style::query()->with('styleImages.imageMedia')
             ->when($request->input('site_id'), function ($query, $siteId) {
                  $query->where('site_id', $siteId);
             });
@@ -61,8 +65,10 @@ class StyleController extends Controller
      */
     public function store(StyleRequest $request)
     {
-        $style = app(StyleManager::class, ['style' => null])->create($request->validated());
-        return new StyleResource($style->load('images'));
+        $params = $request->validated();
+        $this->formatParams($params);
+        $style = app(StyleManager::class, ['style' => null])->create($params);
+        return new StyleResource($style->load('styleImages.imageMedia'));
     }
 
     /**
@@ -116,7 +122,9 @@ class StyleController extends Controller
      */
     public function update(StyleRequest $request, Style $style)
     {
-        $style->update($request->validated());
+        $params = $request->validated();
+        $this->formatParams($params);
+        $style->update($params);
 
         return new StyleResource($style);
     }

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use PostScripton\Money\Casts\MoneyCast;
 
@@ -24,8 +24,8 @@ class Style extends Model
         'old_price' => MoneyCast::class,
     ];
 
-    public function images(): MorphMany
+    public function styleImages(): HasMany
     {
-        return $this->morphMany(Media::class, 'model');
+        return $this->hasMany(StyleImage::class);
     }
 }

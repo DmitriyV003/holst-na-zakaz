@@ -6,7 +6,6 @@ use App\FormApplicationManager;
 use App\Http\Requests\FormApplicationRequest;
 use App\Http\Resources\FormApplicationResource;
 use App\Models\FormApplication;
-use OpenApi\Annotations as OA;
 
 class FormApplicationController extends Controller
 {

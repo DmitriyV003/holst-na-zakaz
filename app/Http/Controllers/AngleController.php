@@ -6,9 +6,12 @@ use App\AngleManager;
 use App\Http\Requests\AngleRequest;
 use App\Http\Resources\AngleResource;
 use App\Models\Angle;
+use App\Traits\ParseToMoney;
 
 class AngleController extends Controller
 {
+    use ParseToMoney;
+
     private const PER_PAGE = 20;
 
     /**
@@ -138,15 +141,5 @@ class AngleController extends Controller
         $angle->delete();
 
         return response()->json();
-    }
-
-    private function formatParams(array &$params)
-    {
-        if (isset($params['price'])) {
-            $params['price'] = money_parse($params['price']);
-        }
-        if (isset($params['old_price'])) {
-            $params['old_price'] = money_parse($params['old_price']);
-        }
     }
 }
