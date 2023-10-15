@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use OpenApi\Annotations as OA;
 
 /**
  * Class FormTypeResource.

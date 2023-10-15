@@ -32,6 +32,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::post('form-application', [FormApplicationController::class, 'store']);
     Route::post('media', [MediaController::class, 'store']);
+    Route::apiResource('site', SiteController::class)->only(['index']);
+    Route::apiResource('angle', AngleController::class)->only(['index']);
 
     Route::prefix('admin')->group(function () {
         Route::apiResource('form-type', FormTypeController::class)
@@ -39,19 +41,18 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('form-application', FormApplicationController::class)
             ->only(['index', 'update']);
         Route::apiResource('site', SiteController::class)
-            ->only(['show', 'store', 'index', 'update', 'destroy']);
+            ->only(['show', 'store', 'update', 'destroy']);
         Route::apiResource('size', SizeController::class)
             ->only(['show', 'store', 'index', 'update', 'destroy']);
         Route::apiResource('field-type', FieldTypeController::class)
             ->only(['show', 'store', 'index', 'update', 'destroy']);
         Route::apiResource('angle', AngleController::class)
-            ->only(['show', 'store', 'index', 'update', 'destroy']);
+            ->only(['show', 'store', 'update', 'destroy']);
         Route::apiResource('style', StyleController::class)
             ->only(['show', 'store', 'index', 'update', 'destroy']);
         Route::apiResource('order', OrderController::class)
             ->only(['show', 'store', 'index', 'update']);
-        Route::apiResource('invoice', InvoiceController::class)
-            ->only(['show', 'store', 'index']);
+        Route::apiResource('invoice', InvoiceController::class)->only(['index']);
         Route::post('order/{order}/credit', [OrderController::class, 'createCreditInvoice']);
         Route::post('stats', [StatsController::class, 'statsByPeriod']);
     });

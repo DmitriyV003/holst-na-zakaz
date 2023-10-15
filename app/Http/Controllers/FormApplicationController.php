@@ -8,9 +8,6 @@ use App\Http\Resources\FormApplicationResource;
 use App\Models\FormApplication;
 use OpenApi\Annotations as OA;
 
-/**
- * @OA\Info(title="Form Applications Controller", version="1.0")
- */
 class FormApplicationController extends Controller
 {
     private const PER_PAGE = 20;
@@ -41,14 +38,14 @@ class FormApplicationController extends Controller
      *     summary="Returns paginated form applicaions",
      *     operationId="storeFormAppication",
      *     @OA\Response(
-     *         response=200,
+     *         response=201,
      *         description="successful",
      *         @OA\JsonContent(
      *             type="object",
      *             ref="#/components/schemas/FormApplicationResource"
      *         )
      *     ),
-     *     @OA\RequestBody(ref="#/components/requestBodies/FormApplication")
+     *     @OA\RequestBody(ref="#/components/requestBodies/FormApplicationRequest")
      * )
      */
     public function store(FormApplicationRequest $request)
@@ -58,6 +55,30 @@ class FormApplicationController extends Controller
         return new FormApplicationResource($application);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/v1/form-application/{id}",
+     *     summary="Returns paginated form applicaions",
+     *     operationId="updateFormAppication",
+     *     @OA\Parameter(
+     *          in="path",
+     *          name="id",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="successful",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             ref="#/components/schemas/FormApplicationResource"
+     *         )
+     *     ),
+     *     @OA\RequestBody(ref="#/components/requestBodies/FormApplicationRequest")
+     * )
+     */
     public function update(FormApplicationRequest $request, FormApplication $formApplication)
     {
         $formApplication->update($request->validated());

@@ -16,6 +16,61 @@ class OrderController extends Controller
 {
     private const PER_PAGE = 20;
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/admin/order",
+     *     summary="Returns paginated orders",
+     *     operationId="getAllOrders",
+     *     @OA\Parameter(
+     *          in="query",
+     *          name="status",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *          in="query",
+     *          name="id",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *          in="query",
+     *          name="date",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="dateTime"
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *          in="query",
+     *          name="phone",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="string"
+     *          )
+     *     ),
+     *     @OA\Parameter(
+     *          in="query",
+     *          name="form_type_id",
+     *          required=false,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/OrderResource")
+     *         )
+     *     )
+     * )
+     */
     public function index(Request $request)
     {
         return OrderResource::collection(
@@ -44,6 +99,22 @@ class OrderController extends Controller
         );
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/v1/admin/order",
+     *     summary="Create order",
+     *     operationId="storeOrder",
+     *     @OA\Response(
+     *         response=201,
+     *         description="successful",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             ref="#/components/schemas/OrderResource"
+     *         )
+     *     ),
+     *     @OA\RequestBody(ref="#/components/requestBodies/OrderRequest")
+     * )
+     */
     public function store(OrderRequest $request)
     {
         $order = app(OrderManager::class, ['order' => null])
@@ -51,11 +122,55 @@ class OrderController extends Controller
         return new OrderResource($order);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/v1/admin/order/{id}",
+     *     summary="Returns order by id",
+     *     operationId="getOrderById",
+     *     @OA\Parameter(
+     *          in="path",
+     *          required=true,
+     *          name="id",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful",
+     *         ref="#/components/schemas/OrderResource"
+     *     )
+     * )
+     */
     public function show(Order $order)
     {
         return new OrderResource($order->load('formApplication', 'debitInvoices', 'creditInvoices', 'size', 'angle'));
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/v1/admin/order/{id}",
+     *     summary="Update order by id",
+     *     operationId="updateOrderById",
+     *     @OA\Parameter(
+     *          in="path",
+     *          name="id",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="successful",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             ref="#/components/schemas/OrderResource"
+     *         )
+     *     ),
+     *     @OA\RequestBody(ref="#/components/requestBodies/OrderRequest")
+     * )
+     */
     public function update(OrderRequest $request, Order $order)
     {
         $order->update($request->validated());
@@ -63,6 +178,25 @@ class OrderController extends Controller
         return new OrderResource($order);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/v1/admin/order/{id}",
+     *     summary="Delete order by id",
+     *     operationId="deleteOrderById",
+     *     @OA\Parameter(
+     *          in="path",
+     *          name="id",
+     *          required=true,
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="successful"
+     *     )
+     * )
+     */
     public function destroy(Order $order)
     {
         $order->delete();

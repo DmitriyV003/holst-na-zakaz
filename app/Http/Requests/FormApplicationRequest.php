@@ -8,30 +8,33 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\RequestBody(
- *     request="FormApplication",
- *     description="Pet object that needs to be added to the store",
+ *     request="FormApplicationRequest",
+ *     description="Создание формы обратной связи",
  *     required=true,
  *     @OA\MediaType(
  *         mediaType="application/json",
  *         @OA\Schema(
  *             @OA\Property(
  *                  property="phone",
- *                  type="string"
+ *                  type="string",
+ *                  nullable="false"
  *              ),
  *              @OA\Property(
  *                  property="comment",
- *                  type="string"
+ *                  type="string",
+ *                  nullable="true"
  *              ),
  *              @OA\Property(
  *                  property="form_type_id",
- *                  type="integer"
+ *                  type="integer",
+ *                  nullable="false"
  *              ),
  *              @OA\Property(
  *                  property="media_id",
- *                  type="integer"
+ *                  type="integer",
+ *                  nullable="true"
  *              ),
  *         )
- *
  *     )
  * )
  */
@@ -49,7 +52,7 @@ class FormApplicationRequest extends FormRequest
                 'nullable',
             ],
             'form_type_id' => [
-                'nullable',
+                'required',
                 Rule::exists('form_types', 'id'),
             ],
             'media_id' => [

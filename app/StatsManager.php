@@ -28,7 +28,7 @@ class StatsManager
                     DB::raw("SUM(CASE WHEN invoices.type = 'debit' THEN amount ELSE 0 END) +
   SUM(CASE WHEN invoices.type = 'credit' THEN -amount ELSE 0 END) AS revenue"),
                     DB::raw("COUNT(DISTINCT order_id) as orders"),
-                    DB::raw('created_at::date'),
+                    DB::raw('created_at::date as date'),
                 ]
             )
             ->groupByRaw(DB::raw('created_at::date'))
