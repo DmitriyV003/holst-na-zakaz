@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\FieldType;
 use Illuminate\Http\Request;
 use OpenApi\Annotations as OA;
 
@@ -88,6 +89,8 @@ class SiteResource extends Resource
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
+            'fields' => FieldTypeResource::collection($this->whenLoaded('fieldTypes')),
             'created_at' => $this->formatDateField($this->created_at),
             'updated_at' => $this->formatDateField($this->updated_at),
         ];

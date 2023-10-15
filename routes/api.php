@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AngleController;
+use App\Http\Controllers\FieldTypeController;
 use App\Http\Controllers\FormApplicationController;
 use App\Http\Controllers\FormTypeController;
 use App\Http\Controllers\InvoiceController;
@@ -40,6 +41,8 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('site', SiteController::class)
             ->only(['show', 'store', 'index', 'update', 'destroy']);
         Route::apiResource('size', SizeController::class)
+            ->only(['show', 'store', 'index', 'update', 'destroy']);
+        Route::apiResource('field-type', FieldTypeController::class)
             ->only(['show', 'store', 'index', 'update', 'destroy']);
         Route::apiResource('angle', AngleController::class)
             ->only(['show', 'store', 'index', 'update', 'destroy']);

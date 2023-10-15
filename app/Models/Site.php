@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Site extends Model
@@ -22,4 +23,9 @@ class Site extends Model
         'tin',
         'ip',
     ];
+
+    public function fieldTypes(): BelongsToMany
+    {
+        return $this->belongsToMany(FieldType::class, 'site_field_type')->withPivot('value');
+    }
 }

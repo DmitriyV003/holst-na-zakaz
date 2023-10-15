@@ -19,16 +19,9 @@ class SiteRequest extends FormRequest
                 'string',
                 $uniqueRule,
             ],
-            'address' => 'string|required',
-            'email' => 'string|required',
-            'skype' => 'string|nullable',
-            'phone_country' => 'string|required',
-            'phone_moscow' => 'string|required',
-            'phone_spb' => 'string|required',
-            'support' => 'string|required',
-            'work_hours' => 'string|required',
-            'tin' => 'string|required',
-            'ip' => 'string|required',
+            'fields' => 'nullable|array',
+            'fields.*.field_id' => 'exists:field_types,id',
+            'fields.*.value' => 'required|string',
         ];
     }
 }
